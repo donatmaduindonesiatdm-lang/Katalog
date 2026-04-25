@@ -50,7 +50,7 @@ const products: Product[] = [
     name: "Donat Chimochi",
     description: "Kesegaran yang elegan. Krim strawberry segar dengan glaze pink velvet yang cantik, memberikan sentuhan buah asli berkelas tinggi.",
     price: "Rp 12.000",
-    image: "https://lh3.googleusercontent.com/u/0/d/1TsJ-YpGfKF3lEsAkHnhpE-lwcF2sYd78",
+    image: "https://lh3.googleusercontent.com/u/0/d/1oHXxSL0ilOu-KU6aZqh_-Y6CBIGGHCle",
     variantImage: "https://lh3.googleusercontent.com/u/0/d/1cWADJvgy59JHB98x_Zv3QP0yXvhoU_ZU",
     color: "bg-[#fef3e1]"
   }
