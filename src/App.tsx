@@ -23,31 +23,31 @@ const products: Product[] = [
     description: "Ikon kelembutan kami. Donat klasik dengan sapuan madu murni Cihanjuang yang memberikan rasa manis alami dan tekstur yang meluluhkan hati.",
     price: "Rp 8.000",
     image: "https://lh3.googleusercontent.com/u/0/d/1ufV991UT-qeKXgEOwx2nP5JEOiqNplH3",
-    color: "bg-[#F5F2ED]"
+    color: "bg-[#fef3e1]"
   },
   {
     id: 2,
     name: "Premium Bomboloni",
     description: "Simfoni kemewahan cokelat. Perpaduan premium dark chocolate ganache dengan tekstur beludru untuk pengalaman rasa yang mendalam.",
     price: "Rp 10.000",
-    image: "https://images.unsplash.com/photo-1533910534207-90f270a6a117?auto=format&fit=crop&q=80&w=1200",
-    color: "bg-[#EAEAEA]"
+    image: "https://lh3.googleusercontent.com/u/0/d/1eCS6b0kLS0SbrKR6bBaj7RLZq8MesD8o",
+    color: "bg-[#fef3e1]"
   },
   {
     id: 3,
     name: "Donat Famili",
     description: "Harmoni dari alam. Sentuhan teh hijau Jepang berkualitas tinggi dengan taburan almond renyah, menciptakan momen tenang di setiap gigitan.",
     price: "Rp 30.000",
-    image: "https://images.unsplash.com/photo-1612240498936-65f51013d5d2?auto=format&fit=crop&q=80&w=1200",
-    color: "bg-[#F0F2F0]"
+    image: "https://lh3.googleusercontent.com/u/0/d/1LJUjtkWw6GYEq7M4le_ipbGpKzspQH_7",
+    color: "bg-[#fef3e1]"
   },
   {
     id: 4,
     name: "Donat Chimochi",
     description: "Kesegaran yang elegan. Krim strawberry segar dengan glaze pink velvet yang cantik, memberikan sentuhan buah asli berkelas tinggi.",
     price: "Rp 12.000",
-    image: "https://images.unsplash.com/photo-1527677202312-6cd762696b0c?auto=format&fit=crop&q=80&w=1200",
-    color: "bg-[#F9F5F6]"
+    image: "https://lh3.googleusercontent.com/u/0/d/1TsJ-YpGfKF3lEsAkHnhpE-lwcF2sYd78",
+    color: "bg-[#fef3e1]"
   }
 ];
 
