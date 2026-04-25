@@ -5,7 +5,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, ChevronRight, ShoppingBag, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface Product {
   id: number;
@@ -13,6 +13,7 @@ interface Product {
   description: string;
   price: string;
   image: string;
+  variantImage?: string;
   color: string;
 }
 
@@ -23,6 +24,7 @@ const products: Product[] = [
     description: "Ikon kelembutan kami. Donat klasik dengan sapuan madu murni Cihanjuang yang memberikan rasa manis alami dan tekstur yang meluluhkan hati.",
     price: "Rp 8.000",
     image: "https://lh3.googleusercontent.com/u/0/d/1ufV991UT-qeKXgEOwx2nP5JEOiqNplH3",
+    variantImage: "https://lh3.googleusercontent.com/u/0/d/1vir2DFvACkK0FHGAiwcgWgi-hQ4Z57k8",
     color: "bg-[#fef3e1]"
   },
   {
@@ -31,6 +33,7 @@ const products: Product[] = [
     description: "Simfoni kemewahan cokelat. Perpaduan premium dark chocolate ganache dengan tekstur beludru untuk pengalaman rasa yang mendalam.",
     price: "Rp 10.000",
     image: "https://lh3.googleusercontent.com/u/0/d/1eCS6b0kLS0SbrKR6bBaj7RLZq8MesD8o",
+    variantImage: "https://lh3.googleusercontent.com/u/0/d/1ClheW0jzcCzzXYElYDqpK6_5EDRXQi-P",
     color: "bg-[#fef3e1]"
   },
   {
@@ -39,6 +42,7 @@ const products: Product[] = [
     description: "Harmoni dari alam. Sentuhan teh hijau Jepang berkualitas tinggi dengan taburan almond renyah, menciptakan momen tenang di setiap gigitan.",
     price: "Rp 30.000",
     image: "https://lh3.googleusercontent.com/u/0/d/1LJUjtkWw6GYEq7M4le_ipbGpKzspQH_7",
+    variantImage: "https://lh3.googleusercontent.com/u/0/d/1REhI5oNe2wc0Q1yCwfHzXi2M60HjIJRX",
     color: "bg-[#fef3e1]"
   },
   {
@@ -47,6 +51,7 @@ const products: Product[] = [
     description: "Kesegaran yang elegan. Krim strawberry segar dengan glaze pink velvet yang cantik, memberikan sentuhan buah asli berkelas tinggi.",
     price: "Rp 12.000",
     image: "https://lh3.googleusercontent.com/u/0/d/1TsJ-YpGfKF3lEsAkHnhpE-lwcF2sYd78",
+    variantImage: "https://lh3.googleusercontent.com/u/0/d/1cWADJvgy59JHB98x_Zv3QP0yXvhoU_ZU",
     color: "bg-[#fef3e1]"
   }
 ];
@@ -54,6 +59,7 @@ const products: Product[] = [
 export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const nextSlide = useCallback(() => {
     setDirection(1);
@@ -142,7 +148,7 @@ export default function App() {
         </section>
 
         {/* Content Section (Bottom on Mobile) */}
-        <div className="relative flex-1 lg:h-full bg-editorial-cream px-6 py-4 md:px-[80px] flex flex-col justify-start lg:justify-center z-10 order-2 lg:order-1">
+        <div className="relative flex-1 lg:h-full bg-editorial-cream px-6 py-4 md:px-[80px] flex flex-col justify-start lg:justify-center z-10 order-2 lg:order-1 lg:-mt-12">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={currentIndex}
@@ -151,23 +157,18 @@ export default function App() {
               initial="enter"
               animate="center"
               exit="exit"
-              className="space-y-4 md:space-y-6"
+              className="space-y-6 md:space-y-8"
             >
               <h1 className="serif text-4xl md:text-6xl lg:text-[72px] leading-[1.1] md:leading-[0.95] font-normal text-editorial-gold">
                 {products[currentIndex].name.split(' ')[0]}<br />
                 <span className="italic font-light">{products[currentIndex].name.split(' ').slice(1).join(' ')}</span>
               </h1>
               
-              <div className="serif text-xl md:text-2xl text-editorial-gold py-1">
-                <span className="text-editorial-gold mr-2 text-xs md:text-base align-top font-sans uppercase tracking-[3px] font-bold">IDR</span>
-                {products[currentIndex].price.replace('Rp ', '')}
-                <span className="text-editorial-gold/60 text-[12px] md:text-[14px] ml-2 font-sans font-normal italic">/ pcs</span>
-              </div>
-              
-              <div className="pt-1 md:pt-2">
+              <div className="pt-2 md:pt-4">
                 <motion.button 
                   whileHover={{ backgroundColor: "#fef3e1", color: "#f09a0d" }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => setIsModalOpen(true)}
                   className="border border-editorial-gold py-2.5 px-8 md:px-10 uppercase text-[10px] md:text-[11px] tracking-[2px] font-bold cursor-pointer transition-all duration-300 bg-editorial-gold text-editorial-cream"
                 >
                   Info Selengkapnya
@@ -177,12 +178,12 @@ export default function App() {
           </AnimatePresence>
 
           {/* Nav Controls */}
-          <div className="absolute bottom-[20px] md:bottom-[60px] left-0 w-full lg:w-auto px-6 lg:px-0 lg:left-[80px] flex items-center justify-between lg:justify-start lg:gap-14">
+          <div className="absolute bottom-[40px] md:bottom-[60px] left-0 w-full lg:w-auto px-6 lg:px-0 lg:left-[80px] flex items-center justify-between lg:justify-start lg:gap-14">
             <button 
               onClick={prevSlide}
-              className="flex items-center gap-3 text-[10px] md:text-[11px] uppercase tracking-[2px] text-editorial-gold hover:opacity-100 transition-opacity p-2"
+              className="flex items-center gap-2 text-[10px] md:text-[11px] uppercase tracking-[2px] text-editorial-gold hover:opacity-100 transition-opacity p-2 bg-transparent border-none cursor-pointer"
             >
-              <ArrowLeftIcon size={16} /><span className="md:inline">Prev</span>
+              <ChevronLeft size={18} /><span className="md:inline">Prev</span>
             </button>
             
             <div className="flex gap-2 lg:hidden">
@@ -198,9 +199,9 @@ export default function App() {
 
             <button 
               onClick={nextSlide}
-              className="flex items-center gap-3 text-[10px] md:text-[11px] uppercase tracking-[2px] text-editorial-gold hover:opacity-100 transition-opacity p-2"
+              className="flex items-center gap-2 text-[10px] md:text-[11px] uppercase tracking-[2px] text-editorial-gold hover:opacity-100 transition-opacity p-2 bg-transparent border-none cursor-pointer"
             >
-              <span className="md:inline">Next</span><ArrowRightIcon size={16} />
+              <span className="md:inline">Next</span><ChevronRight size={18} />
             </button>
           </div>
         </div>
@@ -218,26 +219,55 @@ export default function App() {
         </div>
 
       </div>
+
+      {/* Modal Popup */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative bg-editorial-cream w-full max-w-lg md:max-w-2xl max-h-[85vh] overflow-hidden rounded-sm shadow-2xl flex flex-col"
+            >
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 z-[110] p-2 bg-editorial-gold text-editorial-cream rounded-full hover:scale-110 transition-transform"
+              >
+                <X size={20} />
+              </button>
+              
+              <div className="p-6 md:p-10 overflow-y-auto">
+                <div className="text-center mb-6">
+                  <h2 className="serif text-2xl md:text-3xl text-editorial-gold mb-2">{products[currentIndex].name} Variants</h2>
+                  <div className="w-12 h-1 bg-editorial-gold mx-auto" />
+                </div>
+                
+                <div className="relative w-full aspect-square md:aspect-video bg-white/50 rounded-sm overflow-hidden flex items-center justify-center">
+                  <img
+                    src={products[currentIndex].variantImage}
+                    alt={`${products[currentIndex].name} Variants`}
+                    className="w-full h-full object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                
+                <div className="mt-8 text-center">
+                  <p className="text-editorial-gold font-medium uppercase tracking-[2px] text-xs">Pilihan Terlengkap untuk Momen Anda</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
-
-// Custom Icons to match the aesthetic precisely
-function ArrowLeftIcon({ size = 24 }: { size?: number }) {
-  return (
-    <svg width={size * 2} height={size} viewBox="0 0 40 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M40 10 H2 M10 2 L2 10 L10 18" />
-    </svg>
-  );
-}
-
-function ArrowRightIcon({ size = 24 }: { size?: number }) {
-  return (
-    <svg width={size * 2} height={size} viewBox="0 0 40 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M0 10 H38 M30 2 L38 10 L30 18" />
-    </svg>
-  );
-}
-
-// Add CSS for writing-vertical-lr which isn't standard in Tailwind base
-// Actually it is in modern versions or can be added via style
